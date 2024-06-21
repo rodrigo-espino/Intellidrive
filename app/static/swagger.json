@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "0.1.0",
+    "title": "IntelliDrive Docs"
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "example",
+      "description": "Example operations"
+    }
+  ],
+  "paths": {
+    "/route": {
+      "post": {
+        "tags": [
+          "example"
+        ],
+        "summary": "Get route",
+        "description": "Create a route based on coordinates A to B.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elevator configuration details",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "x_initial": {
+                  "type": "float",
+                  "example": "24.0198"
+                },
+                "y_initial": {
+                  "type": "float",
+                  "example": "-104.6517"
+                },
+                "x_final": {
+                  "type": "float",
+                  "example": "24.0198"
+                },
+                "y_final": {
+                  "type": "float",
+                  "example": "-104.6517"
+                },
+                "vehicule": {
+                  "type": "integer",
+                  "example": 9
+                }
+              },
+              "required": [
+                "initial_coords",
+                "final_coords"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Route Created",
+            "examples": {
+              "application/json": {
+                "id": "RECORD_ID",
+                "collectionId": "3wg6mw3xvrst8kr",
+                "collectionName": "Routes",
+                "created": "2022-01-01 01:00:00.123Z",
+                "updated": "2022-01-01 23:59:59.456Z",
+                "to": "test",
+                "from": "test",
+                "date": "2022-01-01 10:00:00.123Z",
+                "route": "test"
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to create record",
+            "examples": {
+              "application/json": {
+                "code": 400,
+                "message": "Failed to create record.",
+                "data": {
+                  "to": {
+                    "code": "validation_required",
+                    "message": "Missing required value."
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "You are not allowed to perform this request",
+            "examples": {
+              "application/json": {
+                    "code": 403,
+                    "message": "You are not allowed to perform this request.",
+                    "data": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
